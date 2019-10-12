@@ -2,6 +2,11 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+
+let page;
+const proxy = "https://cors-anywhere.herokuapp.com/";
+const api = `${proxy}http://en.wikipedia.org/w/api.php?action=parse&section=0&prop=text&page=${page}`
+
 const App: React.FC = () => {
   return (
     <div className="App">
