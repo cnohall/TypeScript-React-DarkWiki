@@ -1,14 +1,12 @@
 import React from 'react';
-import { render } from 'react-dom';
+// import { render } from 'react-dom';
 import './App.css';
 import { string } from 'prop-types';
-
+import ReactDOM from 'react-dom'
+// import jsonToHtml from ''
 
 let page;
 const proxy = "https://cors-anywhere.herokuapp.com/";
-const api = `${proxy}http://en.wikipedia.org/w/api.php?action=parse&section=0&prop=text&page=${page}`
-// class App extends React.Component<{}, IState> {
-
 
 
 class App extends React.Component <{}, { value: string }> {
@@ -19,6 +17,7 @@ class App extends React.Component <{}, { value: string }> {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    console.log( this.handleSubmit)
   }
 
   handleChange(event:any) {
@@ -26,7 +25,20 @@ class App extends React.Component <{}, { value: string }> {
   }
 
   handleSubmit(event:any) {
-    alert('A name was submitted: ' + this.state.value); //error here
+    // alert('A name was submitted: ' + this.state.value); //error here
+    const api = `${proxy}http://en.wikipedia.org/w/api.php?action=parse&format=json&section=0&prop=text&page=${this.state.value}`;
+fetch(api)
+    .then(response => {
+      return response.json();
+    })
+    .then(jsonObject => {
+      let data = jsonObject.parse.text["*"];
+      return <div dangerouslySetInnerHTML={data}></div>;
+    })
+    .then(HTML => {
+      console.log(HTML)
+      ReactDOM.render(HTML, document.getElementById('root'))
+    })
     event.preventDefault();
   }
 
@@ -35,22 +47,26 @@ class App extends React.Component <{}, { value: string }> {
   public render(){
     return (
       <div className="App">
-        <header className="App-header">
         <p>
           DarkWiki by cnohall
         </p>
-        <form onSubmit={this.handleSubmit}>
-        <label>
-          WikiPage:
-          <input type="text" value={this.state.value} onChange={this.handleChange} />
-        </label>
-        <input type="submit" value="Submit" />
-        </form>
+        <header className="App-header">
+
+        <div className="form-style">
+          <form onSubmit={this.handleSubmit}>
+              WikiPage:
+              <input type="text" value={this.state.value} onChange={this.handleChange} >
+              </input>
+            <input type="submit" value="Search" />
+          </form>
+        </div>
         </header>
       </div>
 
     );
   }
 }
+
+
 
 export default App;
