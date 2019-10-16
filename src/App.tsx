@@ -33,11 +33,11 @@ fetch(api)
     })
     .then(jsonObject => {
       let data = jsonObject.parse.text["*"];
-      return <div dangerouslySetInnerHTML={data}></div>;
-    })
-    .then(HTML => {
-      console.log(HTML)
-      ReactDOM.render(HTML, document.getElementById('root'))
+      console.log(data);
+      ReactDOM.render(
+        <div dangerouslySetInnerHTML={{ __html: data}} />,
+        document.getElementById("root")
+      );
     })
     event.preventDefault();
   }
