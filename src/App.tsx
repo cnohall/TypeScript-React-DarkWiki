@@ -1,11 +1,11 @@
 import React from 'react';
 // import { render } from 'react-dom';
 import './App.css';
-import { string } from 'prop-types';
+// import { string } from 'prop-types';
 import ReactDOM from 'react-dom'
 // import jsonToHtml from ''
-
-let page;
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Button from 'react-bootstrap/Button';
 const proxy = "https://cors-anywhere.herokuapp.com/";
 
 
@@ -33,7 +33,6 @@ fetch(api)
     })
     .then(jsonObject => {
       let data = jsonObject.parse.text["*"];
-      console.log(data);
       ReactDOM.render(
         <div dangerouslySetInnerHTML={{ __html: data}} />,
         document.getElementById("root")
@@ -47,6 +46,7 @@ fetch(api)
   public render(){
     return (
       <div className="App">
+
         <p>
           DarkWiki by cnohall
         </p>
@@ -57,7 +57,7 @@ fetch(api)
               WikiPage:
               <input type="text" value={this.state.value} onChange={this.handleChange} >
               </input>
-            <input type="submit" value="Search" />
+          <Button>Search</Button>
           </form>
         </div>
         </header>
