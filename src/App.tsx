@@ -17,8 +17,7 @@ class App extends React.Component <{}, { value: string }> {
 
   handleChange(event:any) {
     this.setState({value: event.target.value});
-    console.log(this.state.value)
-    const api = `${proxy}https://en.wikipedia.org/w/api.php?origin=*&action=opensearch&search=${this.state.value}`
+    const api = `${proxy}https://en.wikipedia.org/w/api.php?origin=*&action=opensearch&search=${event.target.value}`
     fetch(api)
       .then(response => response.json())
       .then(Results)
