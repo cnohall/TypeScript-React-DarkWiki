@@ -1,13 +1,16 @@
+// import Results from './Results.tsx'
+import Results from "./Results.js"
 import React from 'react';
 import './App.css';
+import searchBar from './searchBar'
 import ReactDOM from 'react-dom'
 const proxy = "https://cors-anywhere.herokuapp.com/";
-
 
 class App extends React.Component <{}, { value: string }> {
   constructor(props:any) {
     super(props);
     
+
     this.state = {value: ''};
 
     this.handleChange = this.handleChange.bind(this);
@@ -15,6 +18,16 @@ class App extends React.Component <{}, { value: string }> {
   }
 
   handleChange(event:any) {
+    const api = `${proxy}https://en.wikipedia.org/w/api.php?origin=*&action=opensearch&search=${this.state.value}`
+    fetch(api)
+      .then(response => response.json())
+      .then(Results)
+      .then(data => {
+        ReactDOM.render(
+          <div dangerouslySetInnerHTML={{ __html: searchBar(this.state.value) + data}} />,
+          document.getElementById("root")
+        )
+      })
     this.setState({value: event.target.value});
   }
 
@@ -61,5 +74,6 @@ class App extends React.Component <{}, { value: string }> {
 }
 
 
-
 export default App;
+
+
