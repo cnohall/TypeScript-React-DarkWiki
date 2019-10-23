@@ -1,11 +1,6 @@
 import React from 'react';
-// import { render } from 'react-dom';
 import './App.css';
-// import { string } from 'prop-types';
 import ReactDOM from 'react-dom'
-// import jsonToHtml from ''
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Button from 'react-bootstrap/Button';
 const proxy = "https://cors-anywhere.herokuapp.com/";
 
 
@@ -17,7 +12,6 @@ class App extends React.Component <{}, { value: string }> {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    console.log( this.handleSubmit)
   }
 
   handleChange(event:any) {
@@ -27,7 +21,7 @@ class App extends React.Component <{}, { value: string }> {
   handleSubmit(event:any) {
     // alert('A name was submitted: ' + this.state.value); //error here
     const api = `${proxy}http://en.wikipedia.org/w/api.php?action=parse&format=json&section=0&prop=text&page=${this.state.value}`;
-fetch(api)
+  fetch(api)
     .then(response => {
       return response.json();
     })
@@ -55,9 +49,8 @@ fetch(api)
         <div className="form-style">
           <form onSubmit={this.handleSubmit}>
               WikiPage:
-              <input type="text" value={this.state.value} onChange={this.handleChange} >
-              </input>
-          <Button>Search</Button>
+              <input type="text" value={this.state.value} onChange={this.handleChange} />
+              <input type="submit" value="Submit" />
           </form>
         </div>
         </header>
