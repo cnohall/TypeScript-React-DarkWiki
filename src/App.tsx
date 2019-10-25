@@ -1,4 +1,4 @@
-import Results from "./Results.js"
+import Results from "./API/Results.js"
 import React from 'react';
 import './App.css';
 import ReactDOM from 'react-dom'
@@ -10,7 +10,7 @@ class App extends React.Component <{}, { value: string }> {
     
 
     this.state = {value: ''};
-
+    
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -22,13 +22,14 @@ class App extends React.Component <{}, { value: string }> {
       .then(response => response.json())
       .then(Results)
       .then(data => {
+        console.log(data)
         ReactDOM.render(
           <div dangerouslySetInnerHTML={{ __html: data}} />,
           document.getElementById("search_result")
         )
       })
-
   }
+
 
   handleSubmit(event:any) {
     // alert('A name was submitted: ' + this.state.value); //error here
