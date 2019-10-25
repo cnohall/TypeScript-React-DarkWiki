@@ -2,8 +2,11 @@ import Results from "./API/Results.js"
 import React from 'react';
 import './App.css';
 import ReactDOM from 'react-dom'
-const proxy = "https://cors-anywhere.herokuapp.com/";
+import transformResults from './API/transformResults'
 
+
+
+const proxy = "https://cors-anywhere.herokuapp.com/";
 class App extends React.Component <{}, { value: string }> {
   constructor(props:any) {
     super(props);
@@ -22,7 +25,7 @@ class App extends React.Component <{}, { value: string }> {
       .then(response => response.json())
       .then(Results)
       .then(data => {
-        console.log(data)
+        transformResults(api, data);
         ReactDOM.render(
           <div dangerouslySetInnerHTML={{ __html: data}} />,
           document.getElementById("search_result")
