@@ -13,9 +13,10 @@ class App extends React.Component <{}, { value: string }> {
     
 
     this.state = {value: ''};
-    // this.handleLinkClick = this.handleLinkClick.bind(this);
+
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    // this.handleLinkClick = this.handleLinkClick.bind(this);
     // this.changeListLinks = this.changeListLinks.bind(this);
     // this.findSubstring = this.findSubstring.bind(this);
     // this.findSearchWord = this.findSearchWord.bind(this);
@@ -39,7 +40,6 @@ class App extends React.Component <{}, { value: string }> {
 
 
   handleSubmit(event:any) {
-    // alert('A name was submitted: ' + this.state.value); //error here
     const api = `${proxy}http://en.wikipedia.org/w/api.php?action=parse&format=json&section=0&prop=text&page=${this.state.value}`;
   fetch(api)
     .then(response => {
@@ -61,6 +61,44 @@ class App extends React.Component <{}, { value: string }> {
     })
     event.preventDefault();
   }
+
+  public render(){
+    return (
+      <div className="App">
+
+        <p>
+          DarkWiki by cnohall
+        </p>
+        <header className="App-header">
+
+        <div className="form-style">
+          <form onSubmit={this.handleSubmit}>
+              WikiPage:
+              <input type="text" value={this.state.value} onChange={this.handleChange} />
+              <input type="submit" value="Submit" />
+          </form>
+          <div id="no_result"></div>
+        </div>
+        </header>
+        <div id="search_result"></div>
+      </div>
+
+    );
+  }
+
+
+}
+
+
+
+export default App;
+
+
+
+
+
+
+
 
   // handleLinkClick(searchWord:string) {
   //   console.log(searchWord);
@@ -107,36 +145,3 @@ class App extends React.Component <{}, { value: string }> {
   //   );
   //   return substring
   // }
-  
-  public render(){
-    return (
-      <div className="App">
-
-        <p>
-          DarkWiki by cnohall
-        </p>
-        <header className="App-header">
-
-        <div className="form-style">
-          <form onSubmit={this.handleSubmit}>
-              WikiPage:
-              <input type="text" value={this.state.value} onChange={this.handleChange} />
-              <input type="submit" value="Submit" />
-          </form>
-          <div id="no_result"></div>
-        </div>
-        </header>
-        <div id="search_result"></div>
-      </div>
-
-    );
-  }
-
-
-}
-
-
-
-export default App;
-
-
