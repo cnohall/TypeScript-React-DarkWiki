@@ -13,7 +13,7 @@
     "dig": "0.0.6",
     "gh-pages": "^2.1.1",
     "node-json2html": "^1.2.0",
-    "node-sass": "^4.12.0",
+    "node-sass": "^7.0.0",
     "ramda": "^0.26.1",
     "react": "^16.10.2",
     "react-bootstrap": "^1.0.0-beta.14",
